@@ -1,0 +1,26 @@
+{
+  "name": "supply-chain-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Supply Chain System Monorepo",
+  "license": "ISC",
+  "author": "",
+  "workspaces": [
+    "packages/api",
+    "packages/app"
+  ],
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "scripts": {
+    "dev:all": "concurrently \"npm run dev:api\" \"npm run dev:app\"",
+    "dev:api": "npm run start:dev --workspace=packages/api",
+    "dev:app": "npm run dev --workspace=packages/app",
+    "build:api": "npm run build --workspace=packages/api",
+    "build:app": "npm run build --workspace=packages/app",
+    "test:api": "npm run test --workspace=packages/api",
+    "test:app": "npm run test --workspace=packages/app",
+    "lint": "npm run lint --workspaces",
+    "test": "npm run test --workspaces"
+  }
+}
