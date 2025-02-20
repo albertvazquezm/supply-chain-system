@@ -1,8 +1,9 @@
 "use client"
 
-import { useQueryGetItems } from "@/api/queries/items";
+import { useQueryGetItems } from "@/rq/items";
 import { Button } from "@/components/ui/button";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
+import Link from "next/link";
 
 export default function Items() {
     const { data, isLoading, error } = useQueryGetItems();
@@ -10,7 +11,9 @@ export default function Items() {
         <div>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Items</h1>
-                <Button>Add New Item</Button>
+                <Link href="/items/new">
+                    <Button>Add New Item</Button>
+                </Link>
             </div>
 
             <Table>
@@ -20,6 +23,7 @@ export default function Items() {
                         <TableHead>Name</TableHead>
                         <TableHead>Description</TableHead>
                         <TableHead className="text-right">Price</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -30,6 +34,11 @@ export default function Items() {
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>{item.description}</TableCell>
                                 <TableCell className="text-right">{item.price}</TableCell>
+                                <TableCell className="text-right">
+                                    <Link href={`/items/edit/${item.id}`}>
+                                        <Button variant="outline">Edit</Button>
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                         ))
                     }
