@@ -6,8 +6,8 @@
   "license": "ISC",
   "author": "",
   "workspaces": [
-    "packages/api",
-    "packages/app"
+    "./packages/api",
+    "./packages/app"
   ],
   "dependencies": {
     "concurrently": "^9.1.0"
