@@ -1,12 +1,13 @@
 "use client"
 
+import { useQueryGetItems } from "@/api/queries/items";
 import { Button } from "@/components/ui/button";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
 
 export default function Items() {
+    const { data, isLoading, error } = useQueryGetItems();
     return (
         <div>
-            {/* Header */}
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Items</h1>
                 <Button>Add New Item</Button>
@@ -22,12 +23,16 @@ export default function Items() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell className="font-medium">01</TableCell>
-                        <TableCell>Product 01</TableCell>
-                        <TableCell>Description 01</TableCell>
-                        <TableCell className="text-right">$100.00</TableCell>
-                    </TableRow>
+                    {
+                        data?.map((item) => (
+                            <TableRow key={item.id}>
+                                <TableCell className="font-medium">{item.id}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell className="text-right">{item.price}</TableCell>
+                            </TableRow>
+                        ))
+                    }
                 </TableBody>
             </Table>
         </div>
