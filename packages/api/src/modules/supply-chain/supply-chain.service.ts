@@ -21,4 +21,19 @@ export class SupplyChainService {
   async getSupplyChainItems() {
     return this.supplyChainItemRepository.find();
   }
+
+  async getSupplyChainItem(id: number) {
+    return this.supplyChainItemRepository.findOne({ where: { id } });
+  }
+
+  async updateSupplyChainItem(
+    id: number,
+    supplyChainCreateItem: SupplyChainCreateItem,
+  ) {
+    return this.supplyChainItemRepository.save({
+      id,
+      name: supplyChainCreateItem.name,
+      description: supplyChainCreateItem.description,
+    });
+  }
 }

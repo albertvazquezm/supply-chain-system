@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UsePipes } from '@nestjs/common';
 import { SupplyChainService } from './supply-chain.service';
 import { JsonSchemaValidationPipe } from '@/common/pipes/json-schema.pipe';
 import {
@@ -22,5 +22,19 @@ export class SupplyChainController {
   @Get('/items')
   getSupplyChainItems() {
     return this.supplyChainService.getSupplyChainItems();
+  }
+
+  @Get('/item/:id')
+  getSupplyChainItem(@Param('id') id: number) {
+    return this.supplyChainService.getSupplyChainItem(Number(id));
+  }
+
+  @Put('/item/:id')
+  //@UsePipes(new JsonSchemaValidationPipe(supplyChainCreateItemSchema))
+  updateSupplyChainItem(
+    @Body() supplyChainItem: SupplyChainCreateItem,
+    @Param('id') id: number,
+  ) {
+    return this.supplyChainService.updateSupplyChainItem(Number(id), supplyChainItem);
   }
 }

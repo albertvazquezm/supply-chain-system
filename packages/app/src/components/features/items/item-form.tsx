@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { useEffect } from 'react';
 
 // Define the form schema using Zod
 const itemSchema = z.object({
@@ -23,16 +24,25 @@ type ItemFormData = z.infer<typeof itemSchema>;
 
 interface ItemFormProps {
   onSubmit: (data: ItemFormData) => void;
+  initialData?: ItemFormData;
 }
 
-export function ItemForm({ onSubmit }: ItemFormProps) {
+export function ItemForm({ onSubmit, initialData }: ItemFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset
   } = useForm<ItemFormData>({
     resolver: zodResolver(itemSchema),
+    defaultValues: initialData
   });
+
+  useEffect(() => {
+    if (initialData) {
+      reset(initialData)
+    }
+  }, [initialData]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
