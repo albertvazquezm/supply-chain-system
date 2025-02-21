@@ -35,3 +35,14 @@ export const updateItem = async (id: string, data: any) => {
     });
     return response.json();
 };
+
+export const createItemEvent = async (id: string, itemEvent: any) => {
+    const response = await fetch(`http://localhost:4000/supply-chain/item/${id}/event`, {
+        method: 'POST',
+        body: JSON.stringify(itemEvent),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    return response.json();
+};

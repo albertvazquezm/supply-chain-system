@@ -35,6 +35,9 @@ export default function Items() {
                                 <TableCell>{item.description}</TableCell>
                                 <TableCell className="text-right">{item.price}</TableCell>
                                 <TableCell className="text-right">
+                                    <Link className="me-2" href={`/items/add-event/${item.id}`}>
+                                        <Button variant="outline">Add event</Button>
+                                    </Link>
                                     <Link href={`/items/edit/${item.id}`}>
                                         <Button variant="outline">Edit</Button>
                                     </Link>

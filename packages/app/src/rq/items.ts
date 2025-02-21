@@ -1,6 +1,6 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createItem, getItem, getItems, updateItem } from "../api/items";
+import { createItem, createItemEvent, getItem, getItems, updateItem } from "../api/items";
 import { getItemQueryKey, getItemsQueryKey } from "./query-keys";
 
 export const useQueryGetItems = () => {
@@ -35,5 +35,11 @@ export const useMutationUpdateItem = () => {
             queryClient.setQueryData(getItemQueryKey(updatedItem.id), updatedItem)
             queryClient.setQueryData(getItemsQueryKey(), (old: any) => [...old.map((item: any) => item.id !== updatedItem.id ? item : updatedItem)])
         }
+    });
+};
+
+export const useMutationCreateItemEvent = () => {
+    return useMutation({
+        mutationFn: ({ id, itemEvent }: { id: string, itemEvent: any }) => createItemEvent(id, itemEvent),
     });
 };
