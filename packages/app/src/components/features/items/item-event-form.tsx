@@ -3,18 +3,18 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Loader2, Plus, Trash2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { Plus, Trash2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
+enum EventType {
+  LOCATION = 'location',
+  CUSTODY = 'custody',
+}
+
 const eventTypes = [
-  { label: 'Custody', value: 'custody' },
-  { label: 'Transfer', value: 'transfer' },
-  { label: 'Sale', value: 'sale' },
-  { label: 'Purchase', value: 'purchase' },
-  { label: 'Other', value: 'other' },
+  { label: 'Location', value: EventType.LOCATION },
+  { label: 'Custody', value: EventType.CUSTODY },
 ];
 
 const itemEventAttributeSchema = z.object({
@@ -27,7 +27,7 @@ const itemEventAttributeSchema = z.object({
 });
 
 const itemEventSchema = z.object({
-  eventType: z.enum(eventTypes.map(type => type.value) as [string, ...string[]]),
+  eventType: z.nativeEnum(EventType),
   attributes: z.array(itemEventAttributeSchema),
 });
 
@@ -36,32 +36,23 @@ type ItemEventFormData = z.infer<typeof itemEventSchema>;
 
 interface ItemEventFormProps {
   onSubmit: (data: ItemEventFormData) => void;
-  initialData?: ItemEventFormData;
 }
 
-export function ItemEventForm({ onSubmit, initialData }: ItemEventFormProps) {
+export function ItemEventForm({ onSubmit }: ItemEventFormProps) {
   const {
     register,
     control,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-    reset
   } = useForm<ItemEventFormData>({
     resolver: zodResolver(itemEventSchema),
-    defaultValues: initialData
   });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'attributes',
   });
-
-  useEffect(() => {
-    if (initialData) {
-      reset(initialData)
-    }
-  }, [initialData]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -70,7 +61,7 @@ export function ItemEventForm({ onSubmit, initialData }: ItemEventFormProps) {
         <Select
           {...register('eventType')}
           onValueChange={(value) => {
-            setValue('eventType', value)
+            setValue('eventType', value as EventType)
           }}
           aria-invalid={!!errors.eventType}
         >
@@ -137,14 +128,7 @@ export function ItemEventForm({ onSubmit, initialData }: ItemEventFormProps) {
       </div>
 
       <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          'Submit'
-        )}
+        Create event
       </Button>
     </form>
   );
