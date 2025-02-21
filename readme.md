@@ -1,5 +1,11 @@
 # Supply Chain System Monorepo
 
+
+
+https://github.com/user-attachments/assets/4a170ce9-7779-4924-b7cd-05c1b4f0846d
+
+
+
 This monorepo includes a NestJS API, supporting OpenAPI schema and JSON Schema definitions for DTOs. It also includes a NextJS app that uses the API.
 
 As the project has been created using a very limited amount of time, there are key features missing for any production application. They are listed in the [Missing Features](#missing-features) section.
