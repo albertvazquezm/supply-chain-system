@@ -19,6 +19,8 @@ export class SupplyChainService {
     return this.supplyChainItemRepository.save({
       name: supplyChainCreateItem.name,
       description: supplyChainCreateItem.description,
+      price: supplyChainCreateItem.price,
+      color: supplyChainCreateItem.color,
     });
   }
 
@@ -38,6 +40,8 @@ export class SupplyChainService {
       id,
       name: supplyChainCreateItem.name,
       description: supplyChainCreateItem.description,
+      price: supplyChainCreateItem.price,
+      color: supplyChainCreateItem.color,
     });
   }
 

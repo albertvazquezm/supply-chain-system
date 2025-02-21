@@ -12,6 +12,12 @@ export class SupplyChainItem {
   @Column()
   description: string;
 
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  price: number;
+
+  @Column({ nullable: true })
+  color: string;
+
   @OneToMany(() => SupplyChainItemEvent, (event) => event.item)
   events: SupplyChainItemEvent[];
 }

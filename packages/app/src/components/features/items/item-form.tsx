@@ -5,8 +5,14 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
 import { useEffect } from 'react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+enum Color {
+  RED = 'red',
+  GREEN = 'green',
+  BLUE = 'blue',
+}
 
 // Define the form schema using Zod
 const itemSchema = z.object({
@@ -17,6 +23,8 @@ const itemSchema = z.object({
     .min(10, 'Description must be at least 10 characters')
     .max(500, 'Description cannot exceed 500 characters')
     .optional(),
+  price: z.number().min(0, 'Price must be at least 0').max(1000000, 'Price cannot exceed 1,000,000').optional(),
+  color: z.nativeEnum(Color).nullable().optional(),
 });
 
 // Infer the type from the schema
@@ -31,7 +39,9 @@ export function ItemForm({ onSubmit, initialData }: ItemFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
+    setValue,
+    watch,
     reset
   } = useForm<ItemFormData>({
     resolver: zodResolver(itemSchema),
@@ -74,15 +84,49 @@ export function ItemForm({ onSubmit, initialData }: ItemFormProps) {
         )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          'Submit'
+      <div className="space-y-2">
+        <Label htmlFor="price">Price</Label>
+        <Input
+          id="price"
+          type="number"
+          step="0.01"
+          {...register('price', {
+            setValueAs: (value) => value === "" ? undefined : parseFloat(value)
+          })}
+          aria-invalid={!!errors.price}
+        />
+        {errors.price && (
+          <p className="text-sm text-destructive">{errors.price.message}</p>
         )}
+      </div>
+
+      <div className="space-y-2">
+        <Label>Color</Label>
+        <Select
+          {...register('color')}
+          value={watch('color') ?? undefined}
+          onValueChange={(value) => {
+            setValue('color', value as Color)
+          }}
+          aria-invalid={!!errors.color}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select color" />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.values(Color).map((color) => (
+              <SelectItem key={color} value={color}>
+                {color}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {errors.color && (
+          <p className="text-sm text-destructive">{errors.color.message}</p>
+        )}
+      </div>
+      <Button type="submit">
+        {initialData ? 'Update' : 'Create'}
       </Button>
     </form>
   );

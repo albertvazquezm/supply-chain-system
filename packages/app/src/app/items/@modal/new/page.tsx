@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function NewItemModal() {
-    const { mutate: createItem, isPending, isSuccess } = useMutationCreateItem();
+    const { mutate: createItem, isSuccess } = useMutationCreateItem();
     const router = useRouter()
 
     useEffect(() => {
@@ -21,7 +21,9 @@ export default function NewItemModal() {
             <ItemForm onSubmit={(data) => {
                 createItem({
                     name: data.name,
-                    description: data.description
+                    description: data.description,
+                    price: data.price,
+                    color: data.color
                 })
             }} />
         </RoutedDialog>

@@ -22,7 +22,9 @@ export default function EditItemModal() {
                     id: id as string,
                     data: {
                         name: data.name,
-                        description: data.description
+                        description: data.description,
+                        price: data.price,
+                        color: data.color
                     }
                 })
             }} />
