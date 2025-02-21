@@ -70,4 +70,11 @@ export class SupplyChainController {
   getSupplyChainItemEvents(@Param('id') id: number) {
     return this.supplyChainService.getSupplyChainItemEvents(Number(id));
   }
+
+  @Get('/item/:id/current-location')
+  getSupplyChainItemCurrentLocation(@Param('id') id: number) {
+    return this.supplyChainService.getSupplyChainItemCurrentLocation(
+      Number(id),
+    );
+  }
 }

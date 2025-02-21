@@ -4,6 +4,7 @@ import { useQueryGetItems } from "@/rq/items";
 import { Button } from "@/components/ui/button";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
 import Link from "next/link";
+import { Edit, Eye, List, MapPin, Plus } from "lucide-react";
 
 export default function Items() {
     const { data, isLoading, error } = useQueryGetItems();
@@ -36,13 +37,16 @@ export default function Items() {
                                 <TableCell className="text-right">{item.price}</TableCell>
                                 <TableCell className="text-right">
                                     <Link className="me-2" href={`/items/events/${item.id}`}>
-                                        <Button variant="outline">View events</Button>
+                                        <Button variant="outline"><List /> Events</Button>
                                     </Link>
                                     <Link className="me-2" href={`/items/add-event/${item.id}`}>
-                                        <Button variant="outline">Add event</Button>
+                                        <Button variant="outline"><Plus /> Event</Button>
                                     </Link>
-                                    <Link href={`/items/edit/${item.id}`}>
-                                        <Button variant="outline">Edit</Button>
+                                    <Link className="me-2" href={`/items/edit/${item.id}`}>
+                                        <Button variant="outline"><Edit /></Button>
+                                    </Link>
+                                    <Link href={`/items/current-location/${item.id}`}>
+                                        <Button variant="outline"><MapPin /></Button>
                                     </Link>
                                 </TableCell>
                             </TableRow>

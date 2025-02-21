@@ -63,4 +63,25 @@ export class SupplyChainService {
       order: { createdAt: 'DESC' },
     });
   }
+
+  async getSupplyChainItemCurrentLocation(itemId: number) {
+    const lastLocationEvent = await this.supplyChainItemEventRepository.findOne(
+      {
+        where: { item: { id: itemId }, eventType: 'location' },
+        relations: ['attributes'],
+        order: { createdAt: 'DESC' },
+      },
+    );
+
+    if (!lastLocationEvent) {
+      return null;
+    }
+
+    return {
+      location: lastLocationEvent.attributes.find(
+        (attribute) => attribute.key === 'location',
+      )?.value,
+      date: lastLocationEvent.createdAt,
+    };
+  }
 }

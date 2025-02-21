@@ -53,3 +53,10 @@ export const getItemEvents = async (id: string) => {
     });
     return response.json();
 };
+
+export const getItemCurrentLocation = async (id: string) => {
+    const response = await fetch(`http://localhost:4000/supply-chain/item/${id}/current-location`, {
+        method: 'GET',
+    });
+    return response.json();
+};

@@ -1,7 +1,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createItem, createItemEvent, getItem, getItemEvents, getItems, updateItem } from "../api/items";
-import { getItemEventsQueryKey, getItemQueryKey, getItemsQueryKey } from "./query-keys";
+import { createItem, createItemEvent, getItem, getItemCurrentLocation, getItemEvents, getItems, updateItem } from "../api/items";
+import { getItemEventsQueryKey, getItemQueryKey, getItemsQueryKey, getItemCurrentLocationQueryKey } from "./query-keys";
 
 /**
  * Queries
@@ -25,6 +25,13 @@ export const useQueryGetItemEvents = (id: string) => {
     return useQuery({
         queryKey: getItemEventsQueryKey(id),
         queryFn: () => getItemEvents(id),
+    });
+};
+
+export const useQueryGetItemCurrentLocation = (id: string) => {
+    return useQuery({
+        queryKey: getItemCurrentLocationQueryKey(id),
+        queryFn: () => getItemCurrentLocation(id),
     });
 };
 
