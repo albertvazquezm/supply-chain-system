@@ -10,6 +10,7 @@
     "./packages/app"
   ],
   "dependencies": {
+    "@nestjs/swagger": "^11.0.4",
     "concurrently": "^9.1.0"
   },
   "scripts": {
