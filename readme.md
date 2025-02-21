@@ -58,3 +58,4 @@ docker run -p 3000:3000 supply-chain-app
 - [ ] API Error handling, including form validation errors
 - [ ] Unit and end to end tests
 - [ ] Better SSR support for the frontend
+- [ ] Modal URLs don't support refresh (some config would be needed to support it)
