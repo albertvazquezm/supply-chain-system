@@ -6,6 +6,17 @@ As the project has been created using a very limited amount of time, there are k
 
 The rest of the features required for the project are implemented.
 
+## Features
+
+- [x] Create and update supply chain items
+- [x] Create and retrieve supply chain item events
+- [x] Shortcut to retieve latest location of an event
+- [x] Exposed Swagger UI for API documentation
+- [x] OpenApi support on the API
+- [x] NextJS app with a focus on UX
+- [x] Mobile responsive design (basic implementation)
+- [x] Dockerfiles for production deployment of API and APP
+
 ## Setup
 
 ```bash
