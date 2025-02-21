@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { SupplyChainItemEvent } from './supply-chain-item-event.entity';
 
 @Entity()
 export class SupplyChainItem {
@@ -10,4 +11,7 @@ export class SupplyChainItem {
 
   @Column()
   description: string;
+
+  @OneToMany(() => SupplyChainItemEvent, (event) => event.item)
+  events: SupplyChainItemEvent[];
 }

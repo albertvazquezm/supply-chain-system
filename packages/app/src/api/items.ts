@@ -46,3 +46,10 @@ export const createItemEvent = async (id: string, itemEvent: any) => {
     });
     return response.json();
 };
+
+export const getItemEvents = async (id: string) => {
+    const response = await fetch(`http://localhost:4000/supply-chain/item/${id}/events`, {
+        method: 'GET',
+    });
+    return response.json();
+};

@@ -1,7 +1,11 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createItem, createItemEvent, getItem, getItems, updateItem } from "../api/items";
-import { getItemQueryKey, getItemsQueryKey } from "./query-keys";
+import { createItem, createItemEvent, getItem, getItemEvents, getItems, updateItem } from "../api/items";
+import { getItemEventsQueryKey, getItemQueryKey, getItemsQueryKey } from "./query-keys";
+
+/**
+ * Queries
+ */
 
 export const useQueryGetItems = () => {
     return useQuery({
@@ -16,6 +20,17 @@ export const useQueryGetItem = (id: string) => {
         queryFn: () => getItem(id),
     });
 };
+
+export const useQueryGetItemEvents = (id: string) => {
+    return useQuery({
+        queryKey: getItemEventsQueryKey(id),
+        queryFn: () => getItemEvents(id),
+    });
+};
+
+/**
+ * Mutations
+ */
 
 export const useMutationCreateItem = () => {
     const queryClient = useQueryClient()

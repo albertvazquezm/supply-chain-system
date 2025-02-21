@@ -46,9 +46,17 @@ export class SupplyChainService {
     supplyChainCreateItemEvent: SupplyChainCreateItemEvent,
   ) {
     return this.supplyChainItemEventRepository.save({
-      itemId,
+      item: { id: itemId },
       eventType: supplyChainCreateItemEvent.eventType,
       attributes: supplyChainCreateItemEvent.attributes,
+    });
+  }
+
+  async getSupplyChainItemEvents(itemId: number) {
+    return this.supplyChainItemEventRepository.find({
+      where: { item: { id: itemId } },
+      relations: ['attributes'],
+      order: { createdAt: 'DESC' },
     });
   }
 }

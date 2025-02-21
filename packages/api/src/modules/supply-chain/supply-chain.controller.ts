@@ -65,4 +65,9 @@ export class SupplyChainController {
       supplyChainItemEvent,
     );
   }
+
+  @Get('/item/:id/events')
+  getSupplyChainItemEvents(@Param('id') id: number) {
+    return this.supplyChainService.getSupplyChainItemEvents(Number(id));
+  }
 }
