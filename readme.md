@@ -4,6 +4,8 @@ This monorepo includes a NestJS API, supporting OpenAPI schema and JSON Schema d
 
 As the project has been created using a very limited amount of time, there are key features missing for any production application. They are listed in the [Missing Features](#missing-features) section.
 
+The rest of the features required for the project are implemented.
+
 ## Setup
 
 ```bash
@@ -53,5 +55,6 @@ docker run -p 3000:3000 supply-chain-app
 - [ ] A comprehensive logging system
 - [ ] Shared types package for API DTOs (either generating an SDK using openapi schema or creating a shared package)
 - [ ] Authentication and security
-- [ ] API Error handling, including for form requests
+- [ ] API Error handling, including form validation errors
 - [ ] Unit and end to end tests
+- [ ] Better SSR support for the frontend
