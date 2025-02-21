@@ -42,7 +42,7 @@ export function ItemForm({ onSubmit, initialData }: ItemFormProps) {
     formState: { errors },
     setValue,
     watch,
-    reset
+    reset,
   } = useForm<ItemFormData>({
     resolver: zodResolver(itemSchema),
     defaultValues: initialData
@@ -52,7 +52,7 @@ export function ItemForm({ onSubmit, initialData }: ItemFormProps) {
     if (initialData) {
       reset(initialData)
     }
-  }, [initialData]);
+  }, [initialData, reset]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

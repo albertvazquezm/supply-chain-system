@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function AddEventModal() {
-    const { mutate: createItemEvent, isPending, isSuccess } = useMutationCreateItemEvent();
+    const { mutate: createItemEvent, isSuccess } = useMutationCreateItemEvent();
     const router = useRouter()
     const { id } = useParams()
 
@@ -15,7 +15,7 @@ export default function AddEventModal() {
         if (isSuccess) {
             router.back()
         }
-    }, [isSuccess])
+    }, [isSuccess, router])
 
     return (
         <RoutedDialog title="Add event">

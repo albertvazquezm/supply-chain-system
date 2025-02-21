@@ -42,8 +42,10 @@ export const useQueryGetItemCurrentLocation = (id: string) => {
 export const useMutationCreateItem = () => {
     const queryClient = useQueryClient()
     return useMutation({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutationFn: (item: any) => createItem(item),
         onSuccess: (item) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             queryClient.setQueryData(getItemsQueryKey(), (old: any) => [...old, item])
         }
     });
@@ -52,9 +54,11 @@ export const useMutationCreateItem = () => {
 export const useMutationUpdateItem = () => {
     const queryClient = useQueryClient()
     return useMutation({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutationFn: ({ id, data }: { id: string, data: any }) => updateItem(id, data),
         onSuccess: (updatedItem) => {
             queryClient.setQueryData(getItemQueryKey(updatedItem.id), updatedItem)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             queryClient.setQueryData(getItemsQueryKey(), (old: any) => [...old.map((item: any) => item.id !== updatedItem.id ? item : updatedItem)])
         }
     });
@@ -62,6 +66,7 @@ export const useMutationUpdateItem = () => {
 
 export const useMutationCreateItemEvent = () => {
     return useMutation({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mutationFn: ({ id, itemEvent }: { id: string, itemEvent: any }) => createItemEvent(id, itemEvent),
     });
 };

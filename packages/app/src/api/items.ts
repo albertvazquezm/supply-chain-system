@@ -7,7 +7,7 @@ export const getItems = async () => {
     });
     return response.json();
 };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createItem = async (item: any) => {
     const response = await fetch('http://localhost:4000/supply-chain/item', {
         method: 'POST',
@@ -18,13 +18,15 @@ export const createItem = async (item: any) => {
     });
     return response.json();
 };
+ 
 export const getItem = async (id: string) => {
     const response = await fetch(`http://localhost:4000/supply-chain/item/${id}`, {
         method: 'GET',
     });
     return response.json();
 };
-
+ 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const updateItem = async (id: string, data: any) => {
     const response = await fetch(`http://localhost:4000/supply-chain/item/${id}`, {
         method: 'PUT',
@@ -35,7 +37,7 @@ export const updateItem = async (id: string, data: any) => {
     });
     return response.json();
 };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createItemEvent = async (id: string, itemEvent: any) => {
     const response = await fetch(`http://localhost:4000/supply-chain/item/${id}/event`, {
         method: 'POST',

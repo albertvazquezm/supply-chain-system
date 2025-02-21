@@ -14,7 +14,7 @@ export default function NewItemModal() {
         if (isSuccess) {
             router.back()
         }
-    }, [isSuccess])
+    }, [isSuccess, router])
 
     return (
         <RoutedDialog title="Create item">

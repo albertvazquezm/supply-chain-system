@@ -4,10 +4,10 @@ import { useQueryGetItems } from "@/rq/items";
 import { Button } from "@/components/ui/button";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
 import Link from "next/link";
-import { Edit, Eye, List, MapPin, Plus } from "lucide-react";
+import { Edit, List, MapPin, Plus } from "lucide-react";
 
 export default function Items() {
-    const { data, isLoading, error } = useQueryGetItems();
+    const { data } = useQueryGetItems();
     return (
         <div>
             <div className="flex justify-between items-center mb-6">
@@ -29,7 +29,8 @@ export default function Items() {
                 </TableHeader>
                 <TableBody>
                     {
-                        data?.map((item) => (
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        data?.map((item: any) => (
                             <TableRow key={item.id}>
                                 <TableCell className="font-medium">{item.id}</TableCell>
                                 <TableCell>{item.name}</TableCell>

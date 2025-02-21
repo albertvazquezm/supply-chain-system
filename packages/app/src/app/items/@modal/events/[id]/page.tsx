@@ -9,7 +9,8 @@ export default function ViewItemEventsModal() {
     return (
         <RoutedDialog title="Item events">
             <div className="space-y-4">
-                {data?.map((event) => (
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {data?.map((event: any) => (
                     <div key={event.id} className="flex items-start gap-4 p-4 border rounded-lg">
                         <div className="min-w-[120px]">
                             <div className="font-medium capitalize">{event.eventType}</div>
@@ -19,7 +20,8 @@ export default function ViewItemEventsModal() {
                         </div>
                         <div>
                             <div className="mt-1 text-sm text-muted-foreground flex flex-wrap gap-2">
-                                {event.attributes.map((attribute) => (
+                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                {event.attributes.map((attribute: any) => (
                                     <div key={attribute.key} className="px-2 py-1 bg-muted rounded-full">
                                         <span className="font-medium">{attribute.key}: </span>
                                         {attribute.value}

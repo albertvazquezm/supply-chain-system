@@ -14,7 +14,7 @@ export default function EditItemModal() {
         if (isSuccess) {
             router.back()
         }
-    }, [isSuccess])
+    }, [isSuccess, router])
     return (
         <RoutedDialog title="Edit item">
             <ItemForm initialData={data} onSubmit={(data) => {
