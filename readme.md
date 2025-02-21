@@ -1,5 +1,9 @@
 # Supply Chain System Monorepo
 
+This monorepo includes a NestJS API, supporting OpenAPI schema and JSON Schema definitions for DTOs. It also includes a NextJS app that uses the API.
+
+As the project has been created using a very limited amount of time, there are key features missing for any production application. They are listed in the [Missing Features](#missing-features) section.
+
 ## Setup
 
 ```bash
@@ -46,8 +50,8 @@ docker run -p 3000:3000 supply-chain-app
 
 ## Missing Features
 
-- [ ] Add a CI/CD pipeline to the project
-- [ ] Add a database to the project
-- [ ] Add authentication to the project
-- [ ] Add authorization to the project
-- [ ] Add a monitoring system to the project
+- [ ] A comprehensive logging system
+- [ ] Shared types package for API DTOs (either generating an SDK using openapi schema or creating a shared package)
+- [ ] Authentication and security
+- [ ] API Error handling, including for form requests
+- [ ] Unit and end to end tests
