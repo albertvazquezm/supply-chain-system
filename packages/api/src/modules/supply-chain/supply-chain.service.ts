@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SupplyChainItem } from '@/db/entities/supply-chain-item.entity';
 import { Repository } from 'typeorm';
-import { SupplyChainCreateItem } from './dto/supply-chain-create-item.schema';
+import { SupplyChainUpsertItem } from './dto/supply-chain-upsert-item.schema';
 import { SupplyChainItemEvent } from '@/db/entities/supply-chain-item-event.entity';
 import { SupplyChainCreateItemEvent } from './dto/supply-chain-create-item-event.schema';
 
@@ -15,12 +15,12 @@ export class SupplyChainService {
     private supplyChainItemEventRepository: Repository<SupplyChainItemEvent>,
   ) {}
 
-  async createSupplyChainItem(supplyChainCreateItem: SupplyChainCreateItem) {
+  async createSupplyChainItem(supplyChainUpsertItem: SupplyChainUpsertItem) {
     return this.supplyChainItemRepository.save({
-      name: supplyChainCreateItem.name,
-      description: supplyChainCreateItem.description,
-      price: supplyChainCreateItem.price,
-      color: supplyChainCreateItem.color,
+      name: supplyChainUpsertItem.name,
+      description: supplyChainUpsertItem.description,
+      price: supplyChainUpsertItem.price,
+      color: supplyChainUpsertItem.color,
     });
   }
 
@@ -34,14 +34,14 @@ export class SupplyChainService {
 
   async updateSupplyChainItem(
     id: number,
-    supplyChainCreateItem: SupplyChainCreateItem,
+    supplyChainUpsertItem: SupplyChainUpsertItem,
   ) {
     return this.supplyChainItemRepository.save({
       id,
-      name: supplyChainCreateItem.name,
-      description: supplyChainCreateItem.description,
-      price: supplyChainCreateItem.price,
-      color: supplyChainCreateItem.color,
+      name: supplyChainUpsertItem.name,
+      description: supplyChainUpsertItem.description,
+      price: supplyChainUpsertItem.price,
+      color: supplyChainUpsertItem.color,
     });
   }
 

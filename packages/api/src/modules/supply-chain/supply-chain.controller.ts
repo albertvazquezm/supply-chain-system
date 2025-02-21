@@ -7,26 +7,31 @@ import {
   Put,
   UsePipes,
 } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { SupplyChainService } from './supply-chain.service';
 import { JsonSchemaValidationPipe } from '@/common/pipes/json-schema.pipe';
 import {
-  SupplyChainCreateItem,
-  supplyChainCreateItemSchema,
-} from './dto/supply-chain-create-item.schema';
+  SupplyChainUpsertItem,
+  supplyChainUpsertItemSchema,
+} from './dto/supply-chain-upsert-item.schema';
 import {
   supplyChainCreateItemEventSchema,
   SupplyChainCreateItemEvent,
 } from './dto/supply-chain-create-item-event.schema';
+import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 
+@ApiTags('Supply Chain')
 @Controller('supply-chain')
 export class SupplyChainController {
   constructor(private supplyChainService: SupplyChainService) {}
 
   @Post('/item')
-  @UsePipes(new JsonSchemaValidationPipe(supplyChainCreateItemSchema))
+  @ApiOperation({ summary: 'Create a new supply chain item' })
+  @ApiBody({ schema: supplyChainUpsertItemSchema as SchemaObject })
+  @UsePipes(new JsonSchemaValidationPipe(supplyChainUpsertItemSchema))
   createSupplyChainItem(
     @Body()
-    supplyChainItem: SupplyChainCreateItem,
+    supplyChainItem: SupplyChainUpsertItem,
   ) {
     return this.supplyChainService.createSupplyChainItem(supplyChainItem);
   }
@@ -42,9 +47,10 @@ export class SupplyChainController {
   }
 
   @Put('/item/:id')
-  //@UsePipes(new JsonSchemaValidationPipe(supplyChainCreateItemSchema))
+  @ApiBody({ schema: supplyChainUpsertItemSchema as SchemaObject })
+  @UsePipes(new JsonSchemaValidationPipe(supplyChainUpsertItemSchema))
   updateSupplyChainItem(
-    @Body() supplyChainItem: SupplyChainCreateItem,
+    @Body() supplyChainItem: SupplyChainUpsertItem,
     @Param('id') id: number,
   ) {
     return this.supplyChainService.updateSupplyChainItem(
@@ -54,6 +60,9 @@ export class SupplyChainController {
   }
 
   @Post('/item/:id/event')
+  @ApiOperation({ summary: 'Create a new event for a supply chain item' })
+  @ApiParam({ name: 'id', type: 'number' })
+  @ApiBody({ schema: supplyChainCreateItemEventSchema as SchemaObject })
   @UsePipes(new JsonSchemaValidationPipe(supplyChainCreateItemEventSchema))
   createSupplyChainItemEvent(
     @Body()
